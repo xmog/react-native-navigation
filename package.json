@@ -41,7 +41,8 @@
     "pretest-e2e-ios": "npm run build",
     "test-e2e-ios": "node ./scripts/test.e2e.ios.js",
     "test-all": "node ./scripts/test.all.js",
-    "release": "node ./scripts/release.js"
+    "release": "node ./scripts/release.js",
+    "gen-doc": "node ./scripts/gen-doc.js"
   },
   "peerDependencies": {
     "react": "*",
@@ -71,8 +72,7 @@
     "semver": "5.x.x",
     "shell-utils": "1.x.x",
     "tslint": "5.x.x",
-    "typescript": "2.x.x",
-    "typedoc": "0.x.x"
+    "typescript": "2.x.x"
   },
   "babel": {
     "env": {

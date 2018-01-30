@@ -1,5 +1,3 @@
-throw new Error('temporarily disabled, until newAPI is complete');
-/*
 const jsdoc2md = require('jsdoc-to-markdown');
 const fs = require('fs');
 const path = require('path');
@@ -17,6 +15,12 @@ const PARTIALS = [
   './docs/templates/link.hbs',
   './docs/templates/params-table.hbs'
 ];
+
+run();
+
+function run() {
+  inputFiles().forEach((inputFile) => generateMarkdownForFile(inputFile));
+}
 
 const generateMarkdownForFile = ({ file, outputDir, partial, separator }) => {
   const templateData = jsdoc2md.getTemplateDataSync({ files: file });
@@ -44,7 +48,7 @@ function createDocFileForClass({ className, templateData, outputDir, partial = [
     helper: ['./docs/linkify.js', './docs/stringify.js'],
     partial: [...PARTIALS, ...partial]
   };
-  console.log(`rendering ${className}`);
+  console.log(`rendering ${className}`); //tslint:disable-line
   const output = jsdoc2md.renderSync(options);
   fs.writeFileSync(path.resolve(outputDir, `${className}.md`), output);
 }
@@ -79,5 +83,3 @@ function inputFiles() {
       })
   ];
 }
-
-inputFiles().forEach((inputFile) => generateMarkdownForFile(inputFile)); */
