@@ -1,10 +1,10 @@
 - Getting started
  - [Installation - iOS](/docs/installation-ios)
  - [Installation - Android](/docs/installation-android)
- - [Usage](/docs/usage)
+ - [Basic Usage](/docs/usage)
 - API
  - [Top Level](/docs/Navigation)
-- Params
+- Layouts
  - [Root](/docs/Root)
  - [Container](/docs/Container)
  - [SideMenu](/docs/SideMenu)
