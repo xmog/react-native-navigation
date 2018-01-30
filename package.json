@@ -73,7 +73,8 @@
     "shell-utils": "1.x.x",
     "tslint": "5.x.x",
     "typescript": "2.x.x",
-    "typedoc": "0.x.x"
+    "typedoc": "0.x.x",
+    "handlebars": "4.x.x"
   },
   "babel": {
     "env": {
