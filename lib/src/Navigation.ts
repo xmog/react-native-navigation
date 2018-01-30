@@ -12,33 +12,20 @@ import { ComponentProvider } from 'react-native';
 import { Element } from './adapters/Element';
 
 export class Navigation {
-  public readonly Element;
+  public readonly Element = Element;
 
-  private readonly store;
-  private readonly nativeEventsReceiver;
-  private readonly uniqueIdProvider;
-  private readonly componentRegistry;
-  private readonly layoutTreeParser;
-  private readonly layoutTreeCrawler;
-  private readonly nativeCommandsSender;
-  private readonly commands;
-  private readonly publicEventsRegistry;
-  private readonly privateEventsListener;
+  private readonly store = new Store();
+  private readonly nativeEventsReceiver = new NativeEventsReceiver();
+  private readonly uniqueIdProvider = new UniqueIdProvider();
+  private readonly componentRegistry = new ComponentRegistry(this.store);
+  private readonly layoutTreeParser = new LayoutTreeParser();
+  private readonly layoutTreeCrawler = new LayoutTreeCrawler(this.uniqueIdProvider, this.store);
+  private readonly nativeCommandsSender = new NativeCommandsSender();
+  private readonly commands = new Commands(this.nativeCommandsSender, this.layoutTreeParser, this.layoutTreeCrawler);
+  private readonly publicEventsRegistry = new PublicEventsRegistry(this.nativeEventsReceiver);
+  private readonly privateEventsListener = new PrivateEventsListener(this.nativeEventsReceiver, this.store);
 
   constructor() {
-    this.Element = Element;
-
-    this.store = new Store();
-    this.nativeEventsReceiver = new NativeEventsReceiver();
-    this.uniqueIdProvider = new UniqueIdProvider();
-    this.componentRegistry = new ComponentRegistry(this.store);
-    this.layoutTreeParser = new LayoutTreeParser();
-    this.layoutTreeCrawler = new LayoutTreeCrawler(this.uniqueIdProvider, this.store);
-    this.nativeCommandsSender = new NativeCommandsSender();
-    this.commands = new Commands(this.nativeCommandsSender, this.layoutTreeParser, this.layoutTreeCrawler);
-    this.publicEventsRegistry = new PublicEventsRegistry(this.nativeEventsReceiver);
-    this.privateEventsListener = new PrivateEventsListener(this.nativeEventsReceiver, this.store);
-
     this.privateEventsListener.listenAndHandlePrivateEvents();
   }
 
