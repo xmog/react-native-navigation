@@ -1,10 +1,10 @@
-# Installing
+## Installing
 
 ### Add dependency
 `npm install --save react-native-navigation@alpha`
 
 ### Configure Xcode
-drag-drop `node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj` into Libraries folder in xcode (along the rest of react)
+drag-drop `node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj` into Libraries folder in xcode (along with the rest of react)
 
 Add ReactNativeNavigation into build-phases
 

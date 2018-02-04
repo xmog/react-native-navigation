@@ -1,40 +1,14 @@
 # Contributing
 
-Thanks for you interest in helping out! We'd love your contributions, and there's plenty of work to be done regardless of your skill level. Before you start, you'll need to have some things installed in your environment so that you can run locally.
+Thanks for you interest in helping out! We'd love your contributions, and there's plenty of work to be done regardless of your skill level
 
 ## Environment Requirements
 
 * Mac OSX
-* Latest stable XCode
-* Latest stable Node:
-
-```
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
-export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm install stable
-nvm use stable
-```
-
-* Android SDK:
-
-```
-export ANDROID_HOME=$HOME/android-sdk-macosx
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-
-# fix for https://code.google.com/p/android/issues/detail?id=223424
-mkdir -p ~/.android
-
-# download android SDK
-echo "Downloading Android SDK"
-curl --location https://dl.google.com/android/android-sdk_r24.4.1-macosx.zip | tar -x -z -C $HOME
-```
-
+* [Latest stable Xcode](https://developer.apple.com/xcode/)
+* [Android SDK](https://developer.android.com/studio/index.html)
+* [Latest stable Node](https://github.com/creationix/nvm)
 * [AppleSimulatorUtils](https://github.com/wix/AppleSimulatorUtils)
-
-```
-brew tap wix/brew
-brew install --HEAD applesimutils
-```
 
 ## Basics - Getting Started
 

@@ -1,6 +1,6 @@
 - Getting started
- - [Installation - iOS](/docs/installation-ios)
- - [Installation - Android](/docs/installation-android)
+ - [Installation](/docs/INSTALLING)
+ - [Contributing](/docs/CONTRIBUTING)
  - [Basic Usage](/docs/usage)
 - API
  - [Top Level](/docs/Navigation)
