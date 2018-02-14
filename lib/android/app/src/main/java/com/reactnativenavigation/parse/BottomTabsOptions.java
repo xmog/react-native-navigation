@@ -1,7 +1,8 @@
 package com.reactnativenavigation.parse;
 
-
-import com.reactnativenavigation.parse.Options.BooleanOptions;
+import com.reactnativenavigation.parse.params.Bool;
+import com.reactnativenavigation.parse.params.NullBool;
+import com.reactnativenavigation.parse.parsers.BoolParser;
 
 import org.json.JSONObject;
 
@@ -11,20 +12,24 @@ public class BottomTabsOptions implements DEFAULT_VALUES {
 		BottomTabsOptions options = new BottomTabsOptions();
 		if (json == null) return options;
 
-		options.currentTabId = TextParser.parse(json, "currentTabId");
+        options.color = ColorParser.parse(json, "tabColor");
+        options.selectedColor = ColorParser.parse(json, "selectedTabColor");
+        options.currentTabId = TextParser.parse(json, "currentTabId");
 		options.currentTabIndex = json.optInt("currentTabIndex", NO_INT_VALUE);
-		options.tabBadge = json.optInt("tabBadge", NO_INT_VALUE);
-		options.hidden = BooleanOptions.parse(json.optString("hidden"));
-		options.animateHide = BooleanOptions.parse(json.optString("animateHide"));
+		options.visible = BoolParser.parse(json,"visible");
+		options.animateHide = BoolParser.parse(json,"animateHide");
+        options.testId = TextParser.parse(json, "testID");
 
 		return options;
 	}
 
-	int tabBadge = NO_INT_VALUE;
-	BooleanOptions hidden = BooleanOptions.False;
-	BooleanOptions animateHide = BooleanOptions.False;
+    public Color color = new NullColor();
+    private Color selectedColor = new NullColor();
+	Bool visible = new NullBool();
+	Bool animateHide = new NullBool();
 	public int currentTabIndex = NO_INT_VALUE;
 	public Text currentTabId = new NullText();
+    public Text testId = new NullText();
 
 	void mergeWith(final BottomTabsOptions other) {
 		if (other.currentTabId.hasValue()) {
@@ -33,16 +38,19 @@ public class BottomTabsOptions implements DEFAULT_VALUES {
 		if (NO_INT_VALUE != other.currentTabIndex) {
             currentTabIndex = other.currentTabIndex;
 		}
-		if (NO_INT_VALUE != other.tabBadge) {
-			tabBadge = other.tabBadge;
+		if (other.visible.hasValue()) {
+			visible = other.visible;
 		}
-		if (other.hidden != BooleanOptions.NoValue) {
-			hidden = other.hidden;
-		}
-		if (other.animateHide != BooleanOptions.NoValue) {
+		if (other.animateHide.hasValue()) {
 			animateHide = other.animateHide;
 		}
-	}
+        if (other.color.hasValue()) {
+            color = other.color;
+        }
+        if (other.selectedColor.hasValue()) {
+            selectedColor = other.selectedColor;
+        }
+    }
 
     void mergeWithDefault(final BottomTabsOptions defaultOptions) {
         if (!currentTabId.hasValue()) {
@@ -51,14 +59,17 @@ public class BottomTabsOptions implements DEFAULT_VALUES {
         if (NO_INT_VALUE == currentTabIndex) {
             currentTabIndex = defaultOptions.currentTabIndex;
         }
-        if (NO_INT_VALUE == tabBadge) {
-            tabBadge = defaultOptions.tabBadge;
+        if (!visible.hasValue()) {
+            visible = defaultOptions.visible;
         }
-        if (hidden == BooleanOptions.NoValue) {
-            hidden = defaultOptions.hidden;
-        }
-        if (animateHide == BooleanOptions.NoValue) {
+        if (!animateHide.hasValue()) {
             animateHide = defaultOptions.animateHide;
+        }
+        if (!color.hasValue()) {
+            color = defaultOptions.color;
+        }
+        if (!selectedColor.hasValue()) {
+            selectedColor = defaultOptions.selectedColor;
         }
     }
 }

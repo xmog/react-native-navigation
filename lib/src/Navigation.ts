@@ -6,27 +6,38 @@ import { ComponentRegistry } from './components/ComponentRegistry';
 import { Commands } from './commands/Commands';
 import { LayoutTreeParser } from './commands/LayoutTreeParser';
 import { LayoutTreeCrawler } from './commands/LayoutTreeCrawler';
-import { PrivateEventsListener } from './events/PrivateEventsListener';
 import { PublicEventsRegistry } from './events/PublicEventsRegistry';
 import { ComponentProvider } from 'react-native';
 import { Element } from './adapters/Element';
+import { PrivateEventsListener } from './events/PrivateEventsListener';
 
 export class Navigation {
-  public readonly Element = Element;
+  public readonly Element;
 
-  private readonly store = new Store();
-  private readonly nativeEventsReceiver = new NativeEventsReceiver();
-  private readonly uniqueIdProvider = new UniqueIdProvider();
-  private readonly componentRegistry = new ComponentRegistry(this.store);
-  private readonly layoutTreeParser = new LayoutTreeParser();
-  private readonly layoutTreeCrawler = new LayoutTreeCrawler(this.uniqueIdProvider, this.store);
-  private readonly nativeCommandsSender = new NativeCommandsSender();
-  private readonly commands = new Commands(this.nativeCommandsSender, this.layoutTreeParser, this.layoutTreeCrawler);
-  private readonly publicEventsRegistry = new PublicEventsRegistry(this.nativeEventsReceiver);
-  private readonly privateEventsListener = new PrivateEventsListener(this.nativeEventsReceiver, this.store);
+  private readonly store;
+  private readonly nativeEventsReceiver;
+  private readonly uniqueIdProvider;
+  private readonly componentRegistry;
+  private readonly layoutTreeParser;
+  private readonly layoutTreeCrawler;
+  private readonly nativeCommandsSender;
+  private readonly commands;
+  private readonly publicEventsRegistry;
 
   constructor() {
-    this.privateEventsListener.listenAndHandlePrivateEvents();
+    this.Element = Element;
+
+    this.store = new Store();
+    this.nativeEventsReceiver = new NativeEventsReceiver();
+    this.uniqueIdProvider = new UniqueIdProvider();
+    this.componentRegistry = new ComponentRegistry(this.store);
+    this.layoutTreeParser = new LayoutTreeParser();
+    this.layoutTreeCrawler = new LayoutTreeCrawler(this.uniqueIdProvider, this.store);
+    this.nativeCommandsSender = new NativeCommandsSender();
+    this.commands = new Commands(this.nativeCommandsSender, this.layoutTreeParser, this.layoutTreeCrawler);
+    this.publicEventsRegistry = new PublicEventsRegistry(this.nativeEventsReceiver);
+
+    new PrivateEventsListener(this.nativeEventsReceiver, this.store).listenAndHandlePrivateEvents();
   }
 
   /**

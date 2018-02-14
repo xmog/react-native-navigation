@@ -24,8 +24,8 @@ public class StackController extends ParentController <StackLayout> {
     private final NavigationAnimator animator;
     private StackLayout stackLayout;
 
-    public StackController(final Activity activity, String id) {
-		super(activity, id);
+    public StackController(final Activity activity, String id, Options initialOptions) {
+		super(activity, id, initialOptions);
         animator = new NavigationAnimator(activity);
     }
 
@@ -36,11 +36,13 @@ public class StackController extends ParentController <StackLayout> {
 
     @Override
     public void applyOptions(Options options, ReactComponent component) {
-        stackLayout.applyOptions(options, component);
+        super.applyOptions(options, component);
+        stackLayout.applyOptions(this.options, component);
     }
 
     @Override
     void clearOptions() {
+        super.clearOptions();
         stackLayout.clearOptions();
     }
 

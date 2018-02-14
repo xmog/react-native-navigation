@@ -16,9 +16,9 @@ class OptionsScreen extends Component {
       topBar: {
         title: 'Static Title',
         textColor: 'black',
-        drawUnder: false,
+        drawBehind: false,
         largeTitle: false,
-        hidden: false,
+        visible: true,
         textFontSize: 16,
         textFontFamily: 'HelveticaNeue-Italic',
         testID: testIDs.TOP_BAR_ELEMENT,
@@ -63,7 +63,7 @@ class OptionsScreen extends Component {
         <Button title='Top Bar Transparent' onPress={this.onClickTopBarTransparent} />
         <Button title='Top Bar Opaque' onPress={this.onClickTopBarOpaque} />
         <Button title='scrollView Screen' testID={testIDs.SCROLLVIEW_SCREEN_BUTTON} onPress={this.onClickScrollViewScreen} />
-        <Button title='Custom Transition' onPress={this.onClickCustomTranstition} />
+        <Button title='Custom Transition' testID={testIDs.CUSTOM_TRANSITION_BUTTON} onPress={this.onClickCustomTranstition} />
         <Button title='Show custom alert' testID={testIDs.SHOW_CUSTOM_ALERT_BUTTON} onPress={this.onClickAlert} />
         <Button title='Show snackbar' testID={testIDs.SHOW_SNACKBAR_BUTTON} onPress={this.onClickSnackbar} />
         <Button title='Show overlay' testID={testIDs.SHOW_OVERLAY_BUTTON} onPress={() => this.onClickShowOverlay(true)} />
@@ -162,7 +162,7 @@ class OptionsScreen extends Component {
   onClickShowTopBar() {
     Navigation.setOptions(this.props.componentId, {
       topBar: {
-        hidden: false,
+        visible: true,
         animateHide: true
       }
     });
@@ -171,7 +171,7 @@ class OptionsScreen extends Component {
   onClickHideTopBar() {
     Navigation.setOptions(this.props.componentId, {
       topBar: {
-        hidden: true,
+        visible: false,
         animateHide: true
       }
     });
@@ -210,7 +210,7 @@ class OptionsScreen extends Component {
   onClickPushDefaultOptionsScreen() {
     Navigation.setDefaultOptions({
       topBar: {
-        hidden: true
+        visible: false
       }
     });
 
