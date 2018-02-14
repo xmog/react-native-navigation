@@ -23,7 +23,6 @@
       loadSidebar: true,
       subMaxLevel: 2,
       auto2top: true,
-      search: 'auto',
       plugins: [
         window.DocsifyCopyCodePlugin.init()
       ]
@@ -34,6 +33,8 @@
   <script src="//unpkg.com/prismjs/components/prism-java.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-c.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-objectivec.min.js"></script>
+
+  <!-- this allows us to re-run docs even when offline -->
   <script>
     if (typeof navigator.serviceWorker !== 'undefined') {
       navigator.serviceWorker.register('sw.js')
