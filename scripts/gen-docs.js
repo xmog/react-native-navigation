@@ -10,7 +10,7 @@ function run() {
   --mode modules
   --readme none
   --target ES6
-  --theme node_modules/typedoc-markdown-theme/bin
+  --theme markdown
   --out ./docs/temp/
   ./lib/src
   `);

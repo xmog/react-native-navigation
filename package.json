@@ -77,7 +77,7 @@
     "typescript": "2.x.x",
     "typedoc": "0.x.x",
     "handlebars": "4.x.x",
-    "typedoc-markdown-theme": "0.0.x"
+    "typedoc-plugin-markdown": "1.x.x"
   },
   "babel": {
     "env": {
