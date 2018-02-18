@@ -1,15 +1,17 @@
 const exec = require('shell-utils').exec;
-
 run();
 
 function run() {
   exec.execSync(`typedoc
   --excludeExternals
   --excludePrivate
+  --excludeProtected
+  --includeDeclarations
   --mode modules
-  --entryPoint ./lib/src/Navigation
-  --out ./docs/temp/
+  --readme none
+  --target ES6
+  --json ./docs/typedoc.json
   ./lib/src
   `);
 }
-// --json ./docs/typedoc.json
+// --out ./docs/temp/
