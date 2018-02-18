@@ -1,0 +1,1078 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>react-native-navigation</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">react-native-navigation</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> react-native-navigation</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://github.com/wix/react-native-navigation/tree/v2#react-native-navigation-v2-wip"><img src="https://img.shields.io/npm/v/react-native-navigation/alpha.svg" alt="npm (tag)"></a>
+					<a href="https://travis-ci.org/wix/react-native-navigation"><img src="https://travis-ci.org/wix/react-native-navigation.svg?branch=v2" alt="Build Status"></a>
+					<a href="https://discord.gg/DhkZjq2"><img src="https://img.shields.io/badge/discord-react--native--navigation-738bd7.svg?style=flat" alt="Join us on Discord"></a>
+				<a href="https://stackoverflow.com/questions/tagged/react-native-navigation"><img src="https://img.shields.io/stackexchange/stackoverflow/t/react-native-navigation.svg" alt="StackExchange"></a></p>
+				<h1 id="react-native-navigation-v2-wip-">React Native Navigation v2 (WIP)</h1>
+				<p>We are rebuilding react-native-navigation.</p>
+				<blockquote>
+					<p>As we are in stage alpha, expect breaking API changes or use a specific version (for example &quot;2.0.1234&quot;)</p>
+				</blockquote>
+				<ul>
+					<li><a href="#why-rebuild-react-native-navigation">Why?</a></li>
+					<li><a href="#v2-roadmap">v2 Roadmap</a></li>
+					<li><a href="#v1-vs-v2-feature-comparison">v1 vs v2 feature comparison</a></li>
+					<li><a href="https://wix.github.io/react-native-navigation/v2/">Documentation</a></li>
+					<li><a href="/docs/docs/CONTRIBUTING.md">Contributing</a></li>
+				</ul>
+				<h2 id="why-rebuild-react-native-navigation-">Why Rebuild react-native-navigation?</h2>
+				<h3 id="a-new-improved-core-architecture">A New &amp; Improved Core Architecture</h3>
+				<p>react-native-navigation has a few issues which are unsolvable in its current architecture. These issues stem from the same problem: you cannot specify on which screen you wish to make an action. Whenever you want to push a screen, show a modal or any other action, the action defaults to originate from your current screen. In most cases this is fine, but becomes problematic in specific edge cases. For example: <br></p>
+				<ul>
+					<li>What if you want to update your navbar icons and the user pops the screen? Your icons might update on the wrong screen.</li>
+					<li>What if you want to push a screen as a result of a redux action?</li>
+				</ul>
+				<p>There are ways to solve some of these problems in v1 but they are not straightforward. We want to change that.</p>
+				<h4 id="new-api">New API</h4>
+				<p>To solve this problem in v2, every screen receives its <code>containerId</code> as a prop. Whenever you want to perform an action from that screen you need to pass the <code>containerId</code> to the function:</p>
+				<pre><code class="lang-js">Navigator.pop(<span class="hljs-keyword">this</span>.props.containerId)
+</code></pre>
+				<h3 id="built-for-contributors">Built for Contributors</h3>
+				<p>Currently, it requires a lot of work to accept pull requests. We need to manually make sure that everything works before we approve them because v1 is not thoroughly tested. <br>
+				v2 is written with contributors in mind from day one.</p>
+				<h4 id="written-in-tdd">Written In TDD</h4>
+				<p>v2 is written in Test Driven Development. We have a test for every feature including features that are not implemented yet. This makes accepting pull requests extremely easy: If our tests pass, your pull request is accepted.</p>
+				<h2 id="v2-roadmap">v2 Roadmap</h2>
+				<h3 id="current-priorities">Current Priorities</h3>
+				<p>1) buttons in Android
+					2) showOverlay in iOS
+					3) showOverlay in Android
+					4) async commands
+					5) currentTab
+					6) change Options to be nested
+				7) topTabs in both platforms, with API implications</p>
+				<h3 id="top-api">Top API</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Top API</th>
+							<th>iOS</th>
+							<th>Android</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>setRoot</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>registerContainer</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>container</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>sideMenu</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>tabs</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>customViewController</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>splitView</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h3 id="screen-api">Screen API</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>Screen API</th>
+							<th>iOS</th>
+							<th>Android</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>push</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>pop</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>popToRoot</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>resetTo</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>showModal</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>dismissModal</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>showOverlay</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>dismissOverlay</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>customTransition</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>Screen Visibility</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>async commands (await push)</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+					</tbody>
+				</table>
+				<h3 id="navigation-options">Navigation Options</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>topBar</th>
+							<th>iOS</th>
+							<th>Android</th>
+							<th>contributors</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>title</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>textColor</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>textFontSize</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>textFontFamily</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>backgroundColor</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>buttonColor</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>hidden</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>hideOnScroll</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>translucent</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>transparent</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>noBorder</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>drawUnder</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>blur</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>custom</td>
+							<td>WIP @gran33</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>subtitleColor</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>subtitleFontFamily</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>largeTitle (iOS 11)</td>
+							<td>✅</td>
+							<td>/iOS Specific</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<thead>
+						<tr>
+							<th>tabBar</th>
+							<th>iOS</th>
+							<th>Android</th>
+							<th>contributors</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>drawUnder</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>hidden</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>tabBadge</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>currentTab by Index</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>currentTab by cointainerId</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<thead>
+						<tr>
+							<th>buttons</th>
+							<th>iOS</th>
+							<th>Android</th>
+							<th>contributors</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>id</td>
+							<td>✅</td>
+							<td>@Johan-dutoit</td>
+							<td>@Johan-dutoit</td>
+						</tr>
+						<tr>
+							<td>testID</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@Johan-dutoit</td>
+						</tr>
+						<tr>
+							<td>color</td>
+							<td>✅</td>
+							<td>@Johan-dutoit</td>
+							<td>@Johan-dutoit</td>
+						</tr>
+						<tr>
+							<td>icon</td>
+							<td>✅</td>
+							<td>@Johan-dutoit</td>
+							<td>@Johan-dutoit</td>
+						</tr>
+						<tr>
+							<td>disableTint</td>
+							<td>✅</td>
+							<td>@Johan-dutoit</td>
+							<td>@Johan-dutoit</td>
+						</tr>
+						<tr>
+							<td>fontSize</td>
+							<td>✅</td>
+							<td>@Johan-dutoit</td>
+							<td>@Johan-dutoit</td>
+						</tr>
+						<tr>
+							<td>fontWeight</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<thead>
+						<tr>
+							<th>statusBar</th>
+							<th>iOS</th>
+							<th>Android</th>
+							<th>contributors</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>textColorScheme</td>
+							<td>in development</td>
+							<td>/ iOS specific</td>
+						</tr>
+						<tr>
+							<td>textColorSchemeSingleScreen</td>
+							<td>in development</td>
+							<td>/ iOS specific</td>
+						</tr>
+						<tr>
+							<td>blur</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>hideWithTopBar</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>hidden</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>WIX</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<thead>
+						<tr>
+							<th>other</th>
+							<th>iOS</th>
+							<th>Android</th>
+							<th>contributors</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>screenBackgroundColor</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>orientation</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>disabledBackGesture</td>
+							<td>✅</td>
+							<td>/ iOS specific</td>
+						</tr>
+						<tr>
+							<td>screenBackgroundImageName</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>rootBackgroundImageName</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>sideMenuVisible</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<h2 id="v1-vs-v2-feature-comparison">v1 vs v2 Feature Comparison</h2>
+				<p>v2 currently supports most of react-native-navigation’s basic functionality but it is still behind v1.
+				Here is the full comparison of features between v1 and v2 (will be updated regularly):</p>
+				<h3 id="top-level-api">Top Level API</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>API</th>
+							<th>v1</th>
+							<th>v2</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>startTabBasedApp</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>startSinglePageApp</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>registerScreen</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>drawer</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+					</tbody>
+				</table>
+				<h3 id="screen-api">Screen API</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>API</th>
+							<th>v1</th>
+							<th>v2  iOS</th>
+							<th>v2 Android</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>push</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>pop</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>showModal</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>popToRoot</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>resetTo</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>dismissModal</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>dismissAllModals</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+						<tr>
+							<td>showContextualMenu</td>
+							<td>✅</td>
+							<td>/ Android specific</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>dismissContextualMenu</td>
+							<td>✅</td>
+							<td>/ Androic specific</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>showFab</td>
+							<td>✅</td>
+							<td>/ Android specific</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>dismissFab</td>
+							<td>✅</td>
+							<td>/ Android specific</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>showSnackBar</td>
+							<td>✅</td>
+							<td>/ Android specific</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>dismissSnackBar</td>
+							<td>✅</td>
+							<td>/ Android specific</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>showLightBox</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>dismissLightBox</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>handleDeepLink</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>Screen Visibility</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+						</tr>
+					</tbody>
+				</table>
+				<h3 id="styles">Styles</h3>
+				<p>Note:  v1 properties with names beginning with &#39;navBar&#39; are replaced in v2 with properties beginning with &#39;topBar&#39; to avoid confusion with the Android native bottom nav bar.</p>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>v1</th>
+							<th>v2 iOS</th>
+							<th>v2 Android</th>
+							<th>Contributors</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>topBarTextColor</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarTextFontSize</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarTextFontFamily</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarBackgroundColor</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarButtonColor</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarHidden</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarHideOnScroll</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarTranslucent</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>topBarTransparent</td>
+							<td>✅</td>
+							<td>WIP @bogobogo</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>topBarNoBorder</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>drawUnderTabBar</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>drawUnderTopBar</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>statusBarBlur</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>topBarBlur</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>tabBarHidden</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>statusBarTextColorScheme</td>
+							<td>✅</td>
+							<td>in development</td>
+							<td>/ iOS specific</td>
+						</tr>
+						<tr>
+							<td>statusBarTextColorSchemeSingleScreen</td>
+							<td>✅</td>
+							<td>in development</td>
+							<td>/ iOS specific</td>
+						</tr>
+						<tr>
+							<td>topBarSubtitleColor</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>topBarSubtitleFontFamily</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>screenBackgroundColor</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>orientation</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>statusBarHideWithTopBar</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@gtchance</td>
+						</tr>
+						<tr>
+							<td>statusBarHidden</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>WIX</td>
+						</tr>
+						<tr>
+							<td>disabledBackGesture</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>/ iOS specific</td>
+						</tr>
+						<tr>
+							<td>screenBackgroundImageName</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>rootBackgroundImageName</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>setButtons</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>@Johan-dutoit</td>
+						</tr>
+						<tr>
+							<td>title</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>toggleDrawer</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>setTabBadge</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td>Wix</td>
+						</tr>
+						<tr>
+							<td>switchToTab</td>
+							<td>✅</td>
+							<td>✅</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>topBarCustomView</td>
+							<td>✅</td>
+							<td>WIP @gran33</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>customTransition(shared element)</td>
+							<td>:x:</td>
+							<td>WIP @bogobogo</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+						<tr>
+							<td>splitViewScreen</td>
+							<td>:x:</td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+							<td><a href="/docs/docs/CONTRIBUTING.md">Contribute</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<p>Element transitions, adding buttons and styles are not yet implemented. <a href="/docs/docs/CONTRIBUTING.md">Contribute</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_navigation_.html">"<wbr>Navigation"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_adapters_element_.html">"adapters/<wbr>Element"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_adapters_nativecommandssender_.html">"adapters/<wbr>Native<wbr>Commands<wbr>Sender"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_adapters_nativecommandssender_mock_.html">"adapters/<wbr>Native<wbr>Commands<wbr>Sender.mock"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_adapters_nativeeventsreceiver_.html">"adapters/<wbr>Native<wbr>Events<wbr>Receiver"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_adapters_nativeeventsreceiver_mock_.html">"adapters/<wbr>Native<wbr>Events<wbr>Receiver.mock"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_adapters_uniqueidprovider_.html">"adapters/<wbr>Unique<wbr>IdProvider"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_adapters_uniqueidprovider_mock_.html">"adapters/<wbr>Unique<wbr>IdProvider.mock"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_commands_.html">"commands/<wbr>Commands"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_commands_test_.html">"commands/<wbr>Commands.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_layouttreecrawler_.html">"commands/<wbr>Layout<wbr>Tree<wbr>Crawler"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_layouttreecrawler_test_.html">"commands/<wbr>Layout<wbr>Tree<wbr>Crawler.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_layouttreeparser_.html">"commands/<wbr>Layout<wbr>Tree<wbr>Parser"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_layouttreeparser_test_.html">"commands/<wbr>Layout<wbr>Tree<wbr>Parser.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_layouttype_.html">"commands/<wbr>Layout<wbr>Type"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_layouttype_test_.html">"commands/<wbr>Layout<wbr>Type.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_optionsprocessor_.html">"commands/<wbr>Options<wbr>Processor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_optionsprocessor_test_.html">"commands/<wbr>Options<wbr>Processor.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_componentregistry_.html">"components/<wbr>Component<wbr>Registry"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_componentregistry_test_.html">"components/<wbr>Component<wbr>Registry.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_componentwrapper_.html">"components/<wbr>Component<wbr>Wrapper"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_componentwrapper_test_.html">"components/<wbr>Component<wbr>Wrapper.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_lifecycle_.html">"components/<wbr>Lifecycle"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_lifecycle_test_.html">"components/<wbr>Lifecycle.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_store_.html">"components/<wbr>Store"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_store_test_.html">"components/<wbr>Store.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_events_privateeventslistener_.html">"events/<wbr>Private<wbr>Events<wbr>Listener"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_events_privateeventslistener_test_.html">"events/<wbr>Private<wbr>Events<wbr>Listener.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_events_publiceventsregistry_.html">"events/<wbr>Public<wbr>Events<wbr>Registry"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_events_publiceventsregistry_test_.html">"events/<wbr>Public<wbr>Events<wbr>Registry.test"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
