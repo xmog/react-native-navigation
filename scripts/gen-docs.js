@@ -11,7 +11,7 @@ function run() {
   --readme none
   --target ES6
   --theme markdown
-  --out ./docs/temp/
+  --out ./docs/api/
   ./lib/src
   `);
 }

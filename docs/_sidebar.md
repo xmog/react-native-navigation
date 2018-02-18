@@ -1,18 +1,4 @@
 - Getting started
  - [Installation](/docs/INSTALLING)
  - [Contributing](/docs/CONTRIBUTING)
- - [Basic Usage](/docs/usage)
-- API
- - [Top Level](/docs/Navigation)
-- Layouts
- - [Root](/docs/Root)
- - [Component](/docs/Component)
- - [SideMenu](/docs/SideMenu)
-- Options
- - [NavigationOptions](/docs/options/NavigationOptions)
- - [TopBar](/docs/options/TopBar)
- - [TopTabs](/docs/options/TopTabs)
- - [TopTab](/docs/options/TopTab)
- - [Button](/docs/options/Button)
- - [BottomTabs](/docs/options/BottomTabs)
- - [BottomTab](/docs/options/BottomTab)
+- [API](/docs/api/README)
