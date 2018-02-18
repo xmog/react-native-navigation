@@ -76,7 +76,8 @@
     "tslint": "5.x.x",
     "typescript": "2.x.x",
     "typedoc": "0.x.x",
-    "handlebars": "4.x.x"
+    "handlebars": "4.x.x",
+    "typedoc-markdown-theme": "0.0.x"
   },
   "babel": {
     "env": {

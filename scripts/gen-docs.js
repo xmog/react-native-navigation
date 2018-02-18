@@ -10,8 +10,9 @@ function run() {
   --mode modules
   --readme none
   --target ES6
-  --json ./docs/typedoc.json
+  --theme node_modules/typedoc-markdown-theme/bin
+  --out ./docs/temp/
   ./lib/src
   `);
 }
-// --out ./docs/temp/
+// --json ./docs/typedoc.json
