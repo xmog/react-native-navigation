@@ -1,4 +1,3 @@
-- Getting started
- - [Installation](/docs/INSTALLING)
- - [Contributing](/docs/CONTRIBUTING)
+- [Installing](/docs/Installing)
+- [Working Locally](/docs/WorkingLocally)
 - [API](/docs/api/README)

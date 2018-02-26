@@ -1,16 +1,16 @@
-# Contributing
+# Working Locally
 
-Thanks for you interest in helping out! We'd love your contributions, and there's plenty of work to be done regardless of your skill level
+> Thanks for your interest in helping out! We'd love your contributions, and there's plenty of work to be done regardless of your skill level
 
 ## Environment Requirements
 
 * Mac OSX
 * [Latest stable Xcode](https://developer.apple.com/xcode/)
 * [Android SDK](https://developer.android.com/studio/index.html)
-* [Latest stable Node](https://github.com/creationix/nvm)
+* [Node 8+](https://nodejs.org/en/)
 * [AppleSimulatorUtils](https://github.com/wix/AppleSimulatorUtils)
 
-## Basics - Getting Started
+## Running The Project
 
 Got your environment set up? Go ahead and clone the repo. (Fork it first so you can open a PR when you're ready.)
 
@@ -18,7 +18,7 @@ Then:
 
 1. Install dependencies:
 
-    ```
+    ```sh
     npm install
     ```
 
@@ -26,31 +26,16 @@ Then:
 
     1. `npm run start` to get the package running in a terminal, leave it open
 
-    1. iOS: `npm run xcode` & run the project from XCode
+    1. **iOS**: `npm run xcode` & run the project from Xcode
 
-    1. Android: Open the app in Android Studio and click `Run`
+    1. **Android**: Open the app in Android Studio and click `Run`, or run `npm run install-android`
 
 1. Run the tests. Before you start changing things, make sure everything works.
 
-     ```
+     ```sh
      npm run test-all
      ```
 
-## Troubleshooting
-
-* If the tests fail with an error like `Ineligible destinations for the "ReactNativeNavigation" scheme`, double check that you have the latest XCode installed.
-* If the tests fail because an Android emulator isn't available (something like `com.android.builder.testing.api.DeviceException: No connected devices!`), start the Android project from Android Studio and leave the emulator running, then try again.
-* If the tests fail with an error such as:
-
-```js
-
- beforeEach(async () => {
-                   ^
-SyntaxError: Unexpected token (
-
-```
-
-You probably have an old node version which doesn't support async functions. Update your node using nvm according to the instructions above.
 
 ## Workflow
 This project is driven by tests. Before implementing any feature or fixing any bug, a failing test (e2e or unit or both) should be added, depending on the environment of where the fix should be implemented. For example, for an API change, a failing e2e should be written. For a small bug fix in Android, for example, a unit test in Android should be added.
@@ -92,4 +77,20 @@ No PR will be accepted without adequate test coverage.
 | `npm run test-e2e-ios` | runs the ios e2e suite (with detox) in debug/release <br> **Options:** `-- --release`|
 | `npm run test-e2e-android` | runs the android e2e suite (with uiautomator) in debug/release on running devices/emulators <br> **Options:** `-- [--release] [--just com.TestClass#testMethod]` |
 | `npm run test-all` | runs all tests in parallel |
+
+## Common Problems
+
+* If the tests fail with an error like `Ineligible destinations for the "ReactNativeNavigation" scheme`, double check that you have the latest XCode installed.
+* If the tests fail because an Android emulator isn't available (something like `com.android.builder.testing.api.DeviceException: No connected devices!`), start the Android project from Android Studio and leave the emulator running, then try again.
+* If the tests fail with an error such as:
+		
+	```js
+		
+	 beforeEach(async () => {
+	                   ^
+	SyntaxError: Unexpected token (
+		
+	```
+		
+	You probably have an old node version which doesn't support async functions. Update your nodejs to 8+.
 
