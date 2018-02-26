@@ -1,29 +1,33 @@
 # Installing
 
-## Add npm dependency
+## Requirements
+* node >= 8
+* react-native >= 0.51
+
+## npm
 * `npm install --save react-native-navigation@alpha`
 
-## Setup iOS
-1. drag-drop `node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj` into Libraries folder in xcode (along with the rest of react)
+## iOS
 
-2. Add ReactNativeNavigation into build-phases
+> Make sure your Xcode is updated. We recommend editing `.h` and `.m` files in Xcode as the IDE will usually point out common errors.
 
-3. in `AppDelegate.m` add:
-  
+1. In Xcode, in Project Navigator (left pane), right-click on the `Libraries` > `Add files to [project name]`. Add `node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj` ([screenshots](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking)).
+
+2. In Xcode, in Project Navigator (left pane), click on your project (top), then click on your *target* row (on the "project and targets list", which is on the left column of the right pane) and select the `Build Phases` tab (right pane). In the `Link Binary With Libraries` section add `libReactNativeNavigation.a` ([screenshots](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#step-2)).
+
+3. In Xcode, you will need to edit this file: `AppDelegate.m`. This function is the main entry point for your app:
+
 	```objectivec
-	#import <ReactNativeNavigation/ReactNativeNavigation.h>
+	 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { ... }
+
 	```
+  
+  Its contents must be replaced with the contents of this [reference](https://github.com/wix/react-native-navigation/blob/v2/playground/ios/playground/AppDelegate.m#L16).
+  
 
-	remove everything in the method `didFinishLaunchingWithOptions` and add:
+## Android
 
-    ```objectivec
-    NSURL *jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-    [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
-    ```
-
-## Setup Android
-
-> Make sure your Android Studio installation is updated. We recommend editing `gradle` and `java` files in Android Studio as the ide will suggest fixes and point out errors, this way you avoid most common pitfalls.
+> Make sure your Android Studio installation is updated. We recommend editing `gradle` and `java` files in Android Studio as the IDE will suggest fixes and point out errors, this way you avoid most common pitfalls.
 
 1. Add the following in `android/settings.gradle`:
 
@@ -141,7 +145,7 @@
 		}
  	}
 	```
-    Make sure that `isDebug` methods is implemented.
+    Make sure that `isDebug` method is implemented.
 
 8. Update `AndroidManifest.xml` and set `application` **android:name** value to `.MainApplication`
 	

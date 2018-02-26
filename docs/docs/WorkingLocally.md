@@ -16,25 +16,13 @@ Got your environment set up? Go ahead and clone the repo. (Fork it first so you 
 
 Then:
 
-1. Install dependencies:
-
-    ```sh
-    npm install
-    ```
-
-1. Run the playground project in Android and iOS so that you can get a feel for the project.
-
-    1. `npm run start` to get the package running in a terminal, leave it open
-
-    1. **iOS**: `npm run xcode` & run the project from Xcode
-
-    1. **Android**: Open the app in Android Studio and click `Run`, or run `npm run install-android`
-
-1. Run the tests. Before you start changing things, make sure everything works.
-
-     ```sh
-     npm run test-all
-     ```
+1. Install dependencies `npm install`
+2. Run the playground project in Android and iOS so that you can get a feel for the project.
+    - `npm run start` to get the packager running in a terminal, leave it open
+    - **iOS**: `npm run xcode` & run the project from Xcode
+    - **Android**: `npm run install-android`, or open the app in Android Studio and click `Run`
+3. Run the tests (using the scripts below). Before you start changing things, make sure everything works.
+	- To easily run all tests in parallel `npm run test-all`
 
 
 ## Workflow
@@ -56,8 +44,8 @@ No PR will be accepted without adequate test coverage.
 | `lib/dist/index.js` | the entry point for `import Navigation from 'react-native-navigation'` |
 | `e2e` | [detox](https://github.com/wix/detox) iOS e2e tests (in the future, once detox supports it, we will have android e2e here as well) |
 | `AndroidE2E` | Android e2e tests using native uiautomator (until detox for android is ready) |
-| `playground` | The end-user project all e2e tests run against. Contains its own `src`, `android` and `ios`. Does not have its own package.json, depends on the local `<root>/lib` in order not to go through npm. |
-| `integration` | misc javascript integration tests |
+| `playground` | The end-user project all e2e tests run against. Contains its own `src`, `android` and `ios`. Does not have its own package.json, depends on the local `<root>/lib` for faster local development (no need to `npm install` locally). |
+| `integration` | misc javascript integration tests, proving integration with other libraries like redux |
 | `scripts` | all scripts |
 
 ## Scripts
@@ -85,11 +73,9 @@ No PR will be accepted without adequate test coverage.
 * If the tests fail with an error such as:
 		
 	```js
-		
 	 beforeEach(async () => {
 	                   ^
 	SyntaxError: Unexpected token (
-		
 	```
 		
 	You probably have an old node version which doesn't support async functions. Update your nodejs to 8+.

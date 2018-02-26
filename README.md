@@ -24,10 +24,12 @@ react-native-navigation has a few issues which are unsolvable in its current arc
 There are ways to solve some of these problems in v1 but they are not straightforward. We want to change that.
 
 #### New API
-To solve this problem in v2, every screen receives its `containerId` as a prop. Whenever you want to perform an action from that screen you need to pass the `containerId` to the function:
+To solve this problem in v2, every screen receives its `componentId` as a prop. Whenever you want to perform an action from that screen you need to pass the `componentId` to the function:
 ```js
-Navigator.pop(this.props.containerId)
+Navigator.pop(this.props.componentId)
 ```
+Another big architectural change is that now you can compose arbitrary native layout hierarchies, and assign a custom `id` to each and control them individually.
+
 ### Built for Contributors
 Currently, it requires a lot of work to accept pull requests. We need to manually make sure that everything works before we approve them because v1 is not thoroughly tested. <br>
 v2 is written with contributors in mind from day one.

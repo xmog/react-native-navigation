@@ -1,3 +1,5 @@
-- [Installing](/docs/Installing)
-- [Working Locally](/docs/WorkingLocally)
-- [API](/docs/api/README)
+- Getting Started
+    - [Installing](/docs/Installing)
+    - [Working Locally](/docs/WorkingLocally)
+    - [Usage](/docs/Usage)
+- [API docs](/docs/api/README)
