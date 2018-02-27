@@ -1,5 +1,6 @@
 - Getting Started
-    - [Installing](/docs/Installing)
-    - [Working Locally](/docs/WorkingLocally)
-    - [Usage](/docs/Usage)
-- [API](/docs/api)
+  - [Installing](/docs/Installing)
+  - [Working Locally](/docs/WorkingLocally)
+  - [Usage](/docs/Usage)
+- API
+  - [Navigation](/api/Navigation)
