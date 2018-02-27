@@ -2,4 +2,4 @@
     - [Installing](/docs/Installing)
     - [Working Locally](/docs/WorkingLocally)
     - [Usage](/docs/Usage)
-- [API docs](/docs/api/README)
+- [API](/docs/api)

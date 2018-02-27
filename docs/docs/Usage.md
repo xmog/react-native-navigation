@@ -4,7 +4,7 @@
 - If you don't like reading, just jump into the fully working [playground](https://github.com/wix/react-native-navigation/tree/v2/playground) project. All feature are implemented there and it's the basis for the e2e tests.
 - We fully support redux, mobx and other state management libraries. See the integration tests [here](https://github.com/wix/react-native-navigation/tree/v2/integration).
 - Navigation is written with `TypeScript` and shipped with the type definitions alongside the transpiled JS code. Use an IDE that supports it like VSCode or Webstorm to enjoy API autocompletion.
-- Take a loot at this excellent showcase app [JuneDomingo/movieapp](https://github.com/JuneDomingo/movieapp). - (using v1 of React Native Navigation with redux).
+- Take a loot at this excellent showcase app [JuneDomingo/movieapp](https://github.com/JuneDomingo/movieapp). (using v1 of React Native Navigation with redux).
 
 ## The Basics
 
