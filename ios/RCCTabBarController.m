@@ -14,8 +14,18 @@
 
 @end
 
+@interface RCCTabBarController ()
+@property(nonatomic, copy)NSMutableArray * preventDefaultArray;
+@end
 @implementation RCCTabBarController
 
+- (NSMutableArray *) preventDefaultArray {
+  if (!_preventDefaultArray) {
+    _preventDefaultArray = [NSMutableArray array];
+  }
+  
+  return _preventDefaultArray;
+}
 
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations {
   return [self supportedControllerOrientations];
@@ -50,9 +60,11 @@
     [RCCTabBarController sendScreenTabPressedEvent:viewController body:nil];
   }
   
+  if ([self.preventDefaultArray[[tabBarController.viewControllers indexOfObject:viewController]] boolValue]) {
+    return false;
+  }
   
-  
-  return YES;
+  return true;
 }
 
 - (UIImage *)image:(UIImage*)image withColor:(UIColor *)color1
@@ -138,6 +150,12 @@
   // go over all the tab bar items
   for (NSDictionary *tabItemLayout in children)
   {
+    if (tabItemLayout[@"props"] && tabItemLayout[@"props"][@"preventDefault"]) {
+      [self.preventDefaultArray addObject:tabItemLayout[@"props"][@"preventDefault"]];
+    } else {
+      [selft.preventDefaultArray addObject:@(false)];
+    }
+    
     // make sure the layout is valid
     if (![tabItemLayout[@"type"] isEqualToString:@"TabBarControllerIOS.Item"]) continue;
     if (!tabItemLayout[@"props"]) continue;
