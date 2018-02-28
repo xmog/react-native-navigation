@@ -484,6 +484,10 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
         slidingOverlaysQueue.destroy();
     }
 
+    private boolean isTabIntercept(int position) {
+        return params.tabParams.get(position).isIntercept;
+    }
+
     @Override
     public boolean onTabSelected(int position, boolean wasSelected) {
         if (wasSelected) {
@@ -492,7 +496,13 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
         }
 
         final int unselectedTabIndex = currentStackIndex;
+
         sendTabSelectedEventToJs(position, unselectedTabIndex);
+
+        if(isTabIntercept(position)) {
+            return false;
+        }
+
         switchTab(position, NavigationType.BottomTabSelected);
         return true;
     }

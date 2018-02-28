@@ -9,6 +9,8 @@ public class ScreenParams extends BaseScreenParams {
     public List<String> sharedElementsTransitions;
     public List<ScreenParams> screens = Collections.EMPTY_LIST; // used to init a stack with multiple screens
 
+    public boolean isIntercept;
+
     public boolean hasTopTabs() {
         return topTabParams != null && !topTabParams.isEmpty();
     }
