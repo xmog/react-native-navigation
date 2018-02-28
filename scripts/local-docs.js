@@ -1,16 +1,26 @@
-const express = require('express');
+const http = require('http');
+const fs = require('fs');
 
 const PORT = 3000;
 
 run();
 
 function run() {
-  const app = express();
-  app.get('/', (req, res) => {
-    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    res.header('Expires', '-1');
-    res.header('Pragma', 'no-cache');
-    res.sendFile(process.cwd() + '/docs/index.html');
-  });
-  app.listen(PORT);
+  http.createServer((req, res) => {
+    if (req.url === '/') {
+      fs.readFile(`${__dirname}/../docs/index.html`, (err, data) => {
+        res.writeHead(200, {
+          'Content-Type': 'text/html',
+          'Cache-Control': 'private, no-cache, no-store, must-revalidate',
+          'Expires': '-1',
+          'Pragma': 'no-cache'
+        });
+        res.write(data);
+        res.end();
+      });
+    } else {
+      res.writeHead(404, {});
+      res.end();
+    }
+  }).listen(PORT);
 }
