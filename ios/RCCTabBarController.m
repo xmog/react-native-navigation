@@ -153,7 +153,7 @@
     if (tabItemLayout[@"props"] && tabItemLayout[@"props"][@"preventDefault"]) {
       [self.preventDefaultArray addObject:tabItemLayout[@"props"][@"preventDefault"]];
     } else {
-      [selft.preventDefaultArray addObject:@(false)];
+      [self.preventDefaultArray addObject:@(false)];
     }
     
     // make sure the layout is valid
