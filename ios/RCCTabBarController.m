@@ -15,16 +15,16 @@
 @end
 
 @interface RCCTabBarController ()
-@property(nonatomic, copy)NSMutableArray * preventDefaultArray;
+@property(nonatomic, copy)NSMutableArray * isInterceptArray;
 @end
 @implementation RCCTabBarController
 
-- (NSMutableArray *) preventDefaultArray {
-  if (!_preventDefaultArray) {
-    _preventDefaultArray = [NSMutableArray array];
+- (NSMutableArray *) isInterceptArray {
+  if (!_isInterceptArray) {
+    _isInterceptArray = [NSMutableArray array];
   }
   
-  return _preventDefaultArray;
+  return _isInterceptArray;
 }
 
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations {
@@ -60,7 +60,7 @@
     [RCCTabBarController sendScreenTabPressedEvent:viewController body:nil];
   }
   
-  if ([self.preventDefaultArray[[tabBarController.viewControllers indexOfObject:viewController]] boolValue]) {
+  if ([self.isInterceptArray[[tabBarController.viewControllers indexOfObject:viewController]] boolValue]) {
     return false;
   }
   
@@ -150,10 +150,10 @@
   // go over all the tab bar items
   for (NSDictionary *tabItemLayout in children)
   {
-    if (tabItemLayout[@"props"] && tabItemLayout[@"props"][@"preventDefault"]) {
-      [self.preventDefaultArray addObject:tabItemLayout[@"props"][@"preventDefault"]];
+    if (tabItemLayout[@"props"] && tabItemLayout[@"props"][@"isIntercept"]) {
+      [self.isInterceptArray addObject:tabItemLayout[@"props"][@"isIntercept"]];
     } else {
-      [self.preventDefaultArray addObject:@(false)];
+      [self.isInterceptArray addObject:@(false)];
     }
     
     // make sure the layout is valid
