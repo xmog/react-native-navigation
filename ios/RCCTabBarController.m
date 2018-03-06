@@ -69,18 +69,18 @@
 
 - (UIImage *)image:(UIImage*)image withColor:(UIColor *)color1
 {
-//  UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
-//  CGContextRef context = UIGraphicsGetCurrentContext();
-//  CGContextTranslateCTM(context, 0, image.size.height);
-//  CGContextScaleCTM(context, 1.0, -1.0);
-//  CGContextSetBlendMode(context, kCGBlendModeNormal);
-//  CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-//  CGContextClipToMask(context, rect, image.CGImage);
-//  [color1 setFill];
-//  CGContextFillRect(context, rect);
-//  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//  UIGraphicsEndImageContext();
-//  return newImage;
+  UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  CGContextTranslateCTM(context, 0, image.size.height);
+  CGContextScaleCTM(context, 1.0, -1.0);
+  CGContextSetBlendMode(context, kCGBlendModeNormal);
+  CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+  CGContextClipToMask(context, rect, image.CGImage);
+  [color1 setFill];
+  CGContextFillRect(context, rect);
+  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return newImage;
   return image;
 }
 
@@ -175,18 +175,32 @@
     id icon = tabItemLayout[@"props"][@"icon"];
     if (icon)
     {
-      iconImage = [RCTConvert UIImage:icon];
-      if (buttonColor)
-      {
-        iconImage = [[self image:iconImage withColor:buttonColor] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+      BOOL disableIconTint = [[RCCManager sharedIntance] getAppStyle][@"disableIconTint"];
+      if (disableIconTint) {
+        iconImage = [[RCTConvert UIImage:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+      } else {
+        iconImage = [RCTConvert UIImage:icon];
+        if (buttonColor)
+        {
+          iconImage = [[self image:iconImage withColor:buttonColor] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        }
       }
     }
     UIImage *iconImageSelected = nil;
     id selectedIcon = tabItemLayout[@"props"][@"selectedIcon"];
+    BOOL disableSelectedIconTint = [[RCCManager sharedInstance] getAppStyle][@"disableSelectedIconTint"];
     if (selectedIcon) {
-      iconImageSelected = [RCTConvert UIImage:selectedIcon];
+      if (disableSelectedIconTint) {
+        iconImageSelected = [[RCTConvert UIImage:selectedIcon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+      } else {
+        iconImageSelected = [RCTConvert UIImage:selectedIcon];
+      }
     } else {
-      iconImageSelected = [RCTConvert UIImage:icon];
+      if (disableSelectedIconTint) {
+        iconImageSelected = [[RCTConvert UIImage:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+      } else {
+        iconImageSelected = [RCTConvert UIImage:icon];
+      }
     }
     
     viewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:iconImage tag:0];
@@ -345,8 +359,12 @@
       id icon = actionParams[@"icon"];
       if (icon && icon != (id)[NSNull null])
       {
-        iconImage = [RCTConvert UIImage:icon];
-        iconImage = [[self image:iconImage withColor:self.tabBar.tintColor] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        BOOL disableIconTint = [[RCCManager sharedInstance] getAppStyle][@"disableIconTint"];
+        if (disableIconTint) {
+          iconImage = [[RCTConvert UIImage:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        } else {
+          iconImage = [RCTConvert UIImage:icon];
+        }
         viewController.tabBarItem.image = iconImage;
       }
       
@@ -354,7 +372,12 @@
       id selectedIcon = actionParams[@"selectedIcon"];
       if (selectedIcon && selectedIcon != (id)[NSNull null])
       {
-        iconImageSelected = [RCTConvert UIImage:selectedIcon];
+        BOOL disableSelectedIconTint = [[RCCManager sharedInstance] getAppStyle][@"disableSelectedIconTint"];
+        if (disableSelectedIconTint) {
+          iconImageSelected = [[RCTConvert UIImage:selectedIcon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        } else {
+          iconImageSelected = [RCTConvert UIImage:selectedIcon];
+        }
         viewController.tabBarItem.selectedImage = iconImageSelected;
       }
       
