@@ -175,7 +175,7 @@
     id icon = tabItemLayout[@"props"][@"icon"];
     if (icon)
     {
-      BOOL disableIconTint = [[RCCManager sharedIntance] getAppStyle][@"disableIconTint"];
+      BOOL disableIconTint = tabItemLayout[@"props"][@"icon"][@"disableIconTint"];
       if (disableIconTint) {
         iconImage = [[RCTConvert UIImage:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
       } else {
@@ -188,7 +188,7 @@
     }
     UIImage *iconImageSelected = nil;
     id selectedIcon = tabItemLayout[@"props"][@"selectedIcon"];
-    BOOL disableSelectedIconTint = [[RCCManager sharedInstance] getAppStyle][@"disableSelectedIconTint"];
+    BOOL disableSelectedIconTint = tabItemLayout[@"props"][@"disableIconTint"][@"disableSelectedIconTint"];
     if (selectedIcon) {
       if (disableSelectedIconTint) {
         iconImageSelected = [[RCTConvert UIImage:selectedIcon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
