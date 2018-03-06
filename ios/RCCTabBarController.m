@@ -188,7 +188,7 @@
     }
     UIImage *iconImageSelected = nil;
     id selectedIcon = tabItemLayout[@"props"][@"selectedIcon"];
-    BOOL disableSelectedIconTint = tabItemLayout[@"props"][@"disableIconTint"][@"disableSelectedIconTint"];
+    BOOL disableSelectedIconTint = tabItemLayout[@"props"][@"disableSelectedIconTint"];
     if (selectedIcon) {
       if (disableSelectedIconTint) {
         iconImageSelected = [[RCTConvert UIImage:selectedIcon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
