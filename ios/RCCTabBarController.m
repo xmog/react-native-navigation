@@ -69,18 +69,23 @@
 
 - (UIImage *)image:(UIImage*)image withColor:(UIColor *)color1
 {
-  UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
-  CGContextRef context = UIGraphicsGetCurrentContext();
-  CGContextTranslateCTM(context, 0, image.size.height);
-  CGContextScaleCTM(context, 1.0, -1.0);
-  CGContextSetBlendMode(context, kCGBlendModeNormal);
-  CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-  CGContextClipToMask(context, rect, image.CGImage);
-  [color1 setFill];
-  CGContextFillRect(context, rect);
-  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-  UIGraphicsEndImageContext();
-  return newImage;
+    
+/* ============================================================================================== */
+/* Hack to allow unselected tab PNGs to come through, @"disableIconTint" currently does not work. */
+/* ============================================================================================== */
+    
+//  UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+//  CGContextRef context = UIGraphicsGetCurrentContext();
+//  CGContextTranslateCTM(context, 0, image.size.height);
+//  CGContextScaleCTM(context, 1.0, -1.0);
+//  CGContextSetBlendMode(context, kCGBlendModeNormal);
+//  CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+//  CGContextClipToMask(context, rect, image.CGImage);
+//  [color1 setFill];
+//  CGContextFillRect(context, rect);
+//  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//  UIGraphicsEndImageContext();
+//  return newImage;
   return image;
 }
 
